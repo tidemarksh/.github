@@ -17,9 +17,29 @@ infrastructure.
 
 ## Architecture
 
-See the [Tidemark architecture documentation](https://tidemarksh.github.io/docs/)
-for the system model, execution architecture, compatibility model, and layer
-boundaries.
+Tidemark is an application-embedded guest execution environment for browser and
+worker hosts. It is not just CPU emulation: it combines guest execution,
+filesystem state, process orchestration, stdio, network bridge hooks, and
+SDK-level provisioning.
+
+```mermaid
+flowchart LR
+  App["browser app"]
+  Tidemark["Tidemark"]
+  Guest["RISC-V Linux userland<br/>CLI tools, language runtimes, build steps"]
+  Files["files and package-backed layers"]
+  Terminal["terminal / stdio"]
+  Network["network bridge hooks"]
+
+  App --> Tidemark
+  Files --> Tidemark
+  Terminal <--> Tidemark
+  Network <--> Tidemark
+  Tidemark --> Guest
+```
+
+For repository boundaries and the full system model, see the
+[Tidemark architecture documentation](https://tidemarksh.github.io/docs/).
 
 ## License
 
