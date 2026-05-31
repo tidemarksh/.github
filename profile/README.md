@@ -17,33 +17,9 @@ infrastructure.
 
 ## Architecture
 
-Tidemark separates guest-visible semantics from host orchestration and product
-policy.
-
-```mermaid
-flowchart TB
-  App["application"]
-  SDK["@tidemarksh/sdk"]
-  Runtime["runtime"]
-  Kernel["kernel wasm"]
-  Guest["RISC-V Linux userland program"]
-
-  App --> SDK
-  App --> Runtime
-  SDK --> Runtime
-  Runtime --> Kernel
-  Kernel --> Guest
-```
-
-The kernel owns Linux/RISC-V compatibility behavior. The runtime owns worker
-lifecycle, state movement, stdio, filesystem snapshots, and host bridge plumbing.
-The SDK owns application ergonomics, package providers, and integration helpers.
-
-## Status
-
-Tidemark is under active development. The current implementation focuses on
-browser-compatible Linux userland execution rather than a full virtual machine
-monitor or browser operating system.
+See the [Tidemark architecture documentation](https://tidemarksh.github.io/docs/)
+for the system model, execution architecture, compatibility model, and layer
+boundaries.
 
 ## License
 
